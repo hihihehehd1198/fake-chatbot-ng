@@ -1,0 +1,36 @@
+<nb-layout>
+
+  <!-- <nb-layout-header fixed> -->
+  <!-- Insert header here -->
+  <!-- </nb-layout-header> -->
+
+  <!-- <nb-layout-column> -->
+  <!-- <h1>đây là phần chatbot làm về phiếu khảo sát</h1> -->
+
+  <!-- </nb-layout-column> -->
+
+  <!-- <nb-layout-footer fixed> -->
+  <!-- Insert footer here -->
+  <!-- </nb-layout-footer> -->
+  <nb-layout-column>
+    <nb-card>
+      <!-- <h1>phần này làm phiếu yêu cầu cho chatbot</h1> -->
+    </nb-card>
+    <nb-card class="background-chat">
+      <div class="background-message">
+        <div class="group-button-function">
+          <button (click)="sendRequestFormOpen()" >Gửi phiếu yêu cầu</button>
+          <button (click)="deleteAllMessage()">DeleteAll</button>
+        </div>
+        <ul #areaMessageChat>
+
+        </ul>
+      </div>
+      <div class="area-send-message">
+        <input type="text" #MessageSend (keyup.enter)="test();">
+        <button (click)="test();">test</button>
+      </div>
+    </nb-card>
+  </nb-layout-column>
+
+</nb-layout>
