@@ -23,7 +23,9 @@
           <button (click)="deleteAllMessage()">DeleteAll</button>
         </div>
         <ul #areaMessageChat>
-
+          <li *ngFor="let item of listMessage">
+            <app-chat-survey [message]=item></app-chat-survey>
+          </li>
         </ul>
       </div>
       <div class="area-send-message">

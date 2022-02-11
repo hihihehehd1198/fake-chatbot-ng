@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbLayoutModule, NbCardModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { ChatSurveyComponent } from './chat-survey/chat-survey.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ChatSurveyComponent
   ],
   imports: [
     BrowserModule,
