@@ -1,14 +1,148 @@
-<nb-layout>
+<!-- <nb-layout>
   <nb-layout-column>
     <nb-card>
-      <div class="background-survey-group">
-        <h1>Khảo sát mức độ hài lòng</h1>
-        <h2>Quý khách có đồng ý với ý kiến “Trợ lý ảo My Viettel đã hỗ trợ tích cực để giúp Quý khách giải quyết vấn đề gặp phải một cách dễ dàng”</h2>
-        <div>
-            <div class='rate-item' #rateItem *ngFor="let item of listRate">{{item}}</div>
+      <nb-card-body>
+        <div class="background-survey-group">
+          <h1>Khảo sát mức độ hài lòng</h1>
+          <h2>
+            Quý khách có đồng ý với ý kiến “Trợ lý ảo My Viettel đã hỗ trợ tích
+            cực để giúp Quý khách giải quyết vấn đề gặp phải một cách dễ dàng”
+          </h2>
+          <div>
+            <div class="rate-item" #rateItem *ngFor="let item of listRate">
+              {{ item }}
+            </div>
+          </div>
+          <h1>test</h1>
         </div>
-        <h1></h1>
-      </div>
+      </nb-card-body>
     </nb-card>
+  </nb-layout-column>
+</nb-layout> -->
+
+<nb-layout>
+  <nb-layout-column>
+    <div class="background-survey-group">
+      <h1>Khảo sát mức độ hài lòng</h1>
+      <h2>
+        Quý khách có đồng ý với ý kiến “Trợ lý ảo My Viettel đã hỗ trợ tích cực
+        để giúp Quý khách giải quyết vấn đề gặp phải một cách dễ dàng”
+      </h2>
+      <div class="rate-item-background">
+        <div class="rate-item" #rateItem *ngFor="let item of listRate">
+          <div class="item-rate" (click)="actionVote(item)">{{ item }}</div>
+        </div>
+      </div>
+      <div class="background-survey-form">
+        <h1 #outputVote>{{ this.stringVote }}</h1>
+        <div #question2A *ngIf="stepKeySurvey === '2a'">
+          <h1>
+            Lý do Quý khách không đồng ý với nhận định trên khi tương tác với
+            Trợ lý ảo My Viettel (có thể chọn nhiều đáp án)?
+          </h1>
+          <div class="checkbox-survey">
+            <div class="checkbox-survey-item">
+              <input type="checkbox" (change)="checked($event)" value="1" />
+              <span>Thời gian phản hồi chậm</span>
+            </div>
+            <div class="checkbox-survey-item">
+              <input type="checkbox" (change)="checked($event)" value="2" />
+              <span>Yêu cầu chưa được xử lý</span>
+            </div>
+            <div class="checkbox-survey-item">
+              <input type="checkbox" (change)="checked($event)" value="3" />
+              <span>Cung cấp thông tin không chính xác</span>
+            </div>
+            <div class="checkbox-survey-item">
+              <input type="checkbox" (change)="checked($event)" value="4" />
+              <span>Ý kiến khác</span>
+              <textarea *ngIf="isSurveyComment"> </textarea>
+            </div>
+          </div>
+        </div>
+        <div #question2>
+          <div question2b *ngIf="stepKeySurvey === '2b'">
+            <h1>
+              Theo Quý khách, Trợ lý ảo My Viettel cần cải thiện điều gì để phục
+              vụ khách hàng tốt hơn?
+            </h1>
+            <div class="text-area-group">
+              <textarea name="" id="" cols="30" rows="10"> </textarea>
+              <button (click)="sendSurvey()">Gửi đánh giá</button>
+            </div>
+          </div>
+
+        </div>
+        <div #question3>
+          <div #question3a *ngIf="stepKeySurvey === '3a'">
+            <h1>
+              Ngoài các vấn đề trên, Quý khách có góp ý nào khác cho Trợ lý ảo
+              My Viettel để nâng cao chất lượng phục vụ?
+            </h1>
+            <div class="text-area-group">
+              <textarea name="" id="" cols="30" rows="10"> </textarea>
+              <button (click)="sendSurvey()">Gửi đánh giá</button>
+            </div>
+          </div>
+
+        </div>
+        <div #question3>
+          <div #question3b *ngIf="stepKeySurvey === '3b'">
+            <h1>
+              Vui lòng nhập nội dung chi tiết vấn đề khiến Quý khách chưa hài
+              lòng khi tương tác với Trợ lý ảo My Viettel:
+            </h1>
+            <div class="text-area-group">
+              <textarea name="" id="" cols="30" rows="10"> </textarea>
+              <button (click)="sendSurvey()">Gửi đánh giá</button>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div
+            #question4
+            class="complete-survey-step"
+            *ngIf="this.isStepSurvey4 === true"
+          >
+            <div>
+              <svg
+                width="61"
+                height="60"
+                viewBox="0 0 61 60"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M58.3161 29.9692C58.3161 45.3488 45.8485 57.8164 30.469 57.8164C15.0894 57.8164 2.62183 45.3488 2.62183 29.9692C2.62183 14.5897 15.0894 2.12207 30.469 2.12207C45.8485 2.12207 58.3161 14.5897 58.3161 29.9692Z"
+                  stroke="#58B84F"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M25.7434 41.2853L48.3134 18.7153"
+                  stroke="#58B84F"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M25.7435 41.2847L12.6865 28.1655"
+                  stroke="#58B84F"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <h1>
+              Cảm ơn Quý khách đã tham gia khảo sát! Nếu có nhu cầu mời Quý
+              khách tiếp tục đưa câu hỏi đề Trợ lý ảo My Viettel hỗ trợ!
+            </h1>
+          </div>
+      </div>
+    </div>
   </nb-layout-column>
 </nb-layout>

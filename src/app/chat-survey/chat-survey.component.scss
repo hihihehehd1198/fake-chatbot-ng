@@ -1,5 +1,92 @@
-:host ::ng-deep{
-  .nb-theme-default h1, .nb-theme-default .h1{
+* {
+  box-sizing: border-box;
+}
+:host ::ng-deep {
+  h1,
+  h2 {
     font-size: 12px;
+    color: black;
+    font-weight: normal;
+  }
+  .background-survey-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .background-survey-group {
+    * {
+      font-size: 14px;
+      line-height: 20px;
+    }
+    // background: red;
+    padding: 10px;
+    border-radius: 20px;
+    margin-top: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .rate-item-background {
+    .rate-item {
+      width: calc(100% / 3 - 20px);
+      display: flex;
+      justify-content: center;
+      .item-rate {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1px solid transparent;
+        background: yellow;
+        color: black;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    display: flex;
+    border: 1px solid blue;
+    padding: 10px;
+    border-radius: 10px;
+    /* flex-wrap: wrap; */
+    justify-content: center;
+    align-items: center;
+    flex-grow: 4;
+    flex-wrap: wrap-reverse;
+    flex-direction: row-reverse;
+  }
+  .background-survey-form div {
+    > h1,
+    h2 {
+      font-size: 12px;
+    }
+    .text-area-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      > textarea {
+        outline: 0;
+        border: 1px solid gray;
+        border-radius: 5px;
+        max-height: 120px;
+        overflow-y: scroll;
+        padding: 10px;
+      }
+    }
+  }
+
+  .complete-survey-step {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+    align-items: center;
+    > div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }

@@ -7,3 +7,27 @@
 };
 /* You can add global styles to this file, and also import other style files */
 
+
+nb-layout {
+  padding: 0;
+  nb-layout-column {
+    padding: 0;
+  }
+  nb-card {
+    padding: 0;
+  }
+  nb-card-body {
+    padding: 0;
+  }
+}
+ul {
+  margin: 0;
+  padding-left: 0;
+
+  li {
+    padding: 0;
+    margin: 0;
+    padding-left: 0;
+    padding-inline-start: 0;
+  }
+}

@@ -24,8 +24,7 @@ export class AppComponent {
     console.log('request form !');
   }
   deleteAllMessage() {
-    const messageChat = this.groupMessageChat.nativeElement;
-    messageChat.innerHTML = "";
+    this.listMessage = [];
 
   }
 }
