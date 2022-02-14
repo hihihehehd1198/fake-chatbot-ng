@@ -29,8 +29,8 @@
         để giúp Quý khách giải quyết vấn đề gặp phải một cách dễ dàng”
       </h2>
       <div class="rate-item-background">
-        <div class="rate-item" #rateItem *ngFor="let item of listRate">
-          <div class="item-rate" (click)="actionVote(item)">{{ item }}</div>
+        <div class="rate-item"  *ngFor="let item of listRate">
+          <div class="item-rate" #rateItem (click)="actionVote(item, $event)">{{ item }}</div>
         </div>
       </div>
       <div class="background-survey-form">

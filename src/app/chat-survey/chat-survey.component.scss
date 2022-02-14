@@ -34,12 +34,12 @@
       display: flex;
       justify-content: center;
       .item-rate {
-        width: 30px;
-        height: 30px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
         border: 1px solid transparent;
-        background: yellow;
-        color: black;
+        background: #979797;
+        color: #ffffff;
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -96,4 +96,31 @@
       justify-content: center;
     }
   }
+}
+
+//custom button with click
+.item-rate-clicked-case1,
+.item-rate-clicked-case2,
+.item-rate-clicked-case3 {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: white;
+  align-items: center;
+}
+.item-rate-clicked-case1 {
+  background: #ee0033;
+  border: 2px solid rgba(238, 0, 51, 0.3);
+}
+.item-rate-clicked-case2 {
+  background: #fe9a00;
+  border: 2px solid rgba(254, 154, 0, 0.3);
+}
+.item-rate-clicked-case3 {
+  background: #58b84f;
+  border: 2px solid rgba(88, 184, 79, 0.3);
 }

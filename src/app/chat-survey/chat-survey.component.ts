@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-chat-survey',
@@ -12,6 +12,7 @@ export class ChatSurveyComponent implements OnInit {
   @Input('message') message: any;
   @ViewChild('outputVote') outputVote: any;
   @ViewChildren('surveyCheckbox') checkboxitem: any;
+  @ViewChildren('rateItem') listrateItem: any;
   stringVote = '';
   stepKeySurvey2 = '';
   stepKeySurvey3 = '';
@@ -28,9 +29,84 @@ export class ChatSurveyComponent implements OnInit {
     { id: '3', name: 'Cung cấp thông tin không chính xác' },
     { id: '4', name: 'Ý kiến khác' }]
   }
-  actionVote(voteNumber: number) {
+  actionVote(voteNumber: number, event: any) {
     this.isStepSurvey3b = false;
     console.log(voteNumber);
+    // if (1 <= voteNumber && voteNumber <= 3) {
+    //   this.stringVote = "Không đồng ý"
+    //   this.stepKeySurvey2 = '2a'
+    //   this.isStepSurvey4 = false;
+    // }
+    // else if (voteNumber === 4) {
+    //   this.stringVote = "Không ý kiến"
+    //   this.stepKeySurvey2 = '2b'
+    //   this.isStepSurvey4 = false;
+    // } else {
+    //   this.stringVote = "đồng ý"
+    //   this.stepKeySurvey2 = '2b'
+    //   this.isStepSurvey4 = false;
+
+    // }
+
+
+    console.log('element : ', event.target.className);
+
+    // debugger
+    // if (event.target.className === 'item-rate' && (1 <= voteNumber && voteNumber <= 3)) {
+    //   event.target.className = 'item-rate-clicked-case1';
+    //   this.stringVote = "Không đồng ý"
+    //   this.stepKeySurvey2 = '2a'
+    //   this.isStepSurvey4 = false;
+
+    // } else if (event.target.className === 'item-rate' && voteNumber === 4) {
+    //   event.target.className = 'item-rate-clicked-case2';
+    //   this.stringVote = "Không ý kiến"
+    //   this.stepKeySurvey2 = '2b'
+    //   this.isStepSurvey4 = false;
+
+    // } else if (event.target.className === 'item-rate') {
+    //   event.target.className = 'item-rate-clicked-case3';
+    //   this.stringVote = "đồng ý"
+    //   this.stepKeySurvey2 = '2b'
+    //   this.isStepSurvey4 = false;
+
+    // } else {
+    //   event.target.className = 'item-rate';
+    //   this.stepKeySurvey2 = ''
+    //   this.stepKeySurvey3 = ''
+    //   this.isStepSurvey3b = false;
+    //   this.isStepSurvey4 = false;
+    // }
+
+    this.listrateItem.forEach((element: ElementRef) => {
+      const elment_number = element.nativeElement.textContent;
+      const element_child = element.nativeElement;
+
+      if (elment_number.toString() === voteNumber.toString()) {
+        if (element_child.className === 'item-rate') {
+          if (1 <= voteNumber && voteNumber <= 3) {
+            element_child.className = 'item-rate-clicked-case1';
+          } else if (voteNumber === 4) {
+            element_child.className = 'item-rate-clicked-case2';
+          } else {
+            element_child.className = 'item-rate-clicked-case3';
+          }
+          this.toggleVoteFunction(voteNumber)
+        } else {
+          event.target.className = 'item-rate';
+          this.stepKeySurvey2 = ''
+          this.stepKeySurvey3 = ''
+          this.isStepSurvey3b = false;
+          this.isStepSurvey4 = false;
+        }
+      } else {
+        element_child.className = 'item-rate';
+      }
+    });
+
+
+  }
+  toggleVoteFunction(voteNumber: number) {
     if (1 <= voteNumber && voteNumber <= 3) {
       this.stringVote = "Không đồng ý"
       this.stepKeySurvey2 = '2a'
