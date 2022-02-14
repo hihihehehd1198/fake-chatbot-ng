@@ -35,12 +35,12 @@
       </div>
       <div class="background-survey-form">
         <h1 #outputVote>{{ this.stringVote }}</h1>
-        <div #question2A *ngIf="stepKeySurvey === '2a'">
+        <div #question2A *ngIf="stepKeySurvey2 === '2a'">
           <h1>
             Lý do Quý khách không đồng ý với nhận định trên khi tương tác với
             Trợ lý ảo My Viettel (có thể chọn nhiều đáp án)?
           </h1>
-          <div class="checkbox-survey">
+          <!-- <div class="checkbox-survey">
             <div class="checkbox-survey-item">
               <input type="checkbox" (change)="checked($event)" value="1" />
               <span>Thời gian phản hồi chậm</span>
@@ -56,12 +56,24 @@
             <div class="checkbox-survey-item">
               <input type="checkbox" (change)="checked($event)" value="4" />
               <span>Ý kiến khác</span>
-              <textarea *ngIf="isSurveyComment"> </textarea>
+            </div>
+            <textarea *ngIf="isSurveyComment===true"> </textarea>
+          </div> -->
+          <div class="checkbox-survey">
+            <div class="checkbox-survey-item" *ngFor="let item of datacheckbox">
+              <input #surveyCheckbox type="checkbox" (change)="checked($event)" [value]="item.id" />
+              <span>{{item.name}}</span>
+            </div>
+            <div class="text-area-group" *ngIf="isSurveyComment">
+              <textarea>
+
+              </textarea>
+              <button (click)="nextStep3b()">Buoc ke tiep</button>
             </div>
           </div>
         </div>
         <div #question2>
-          <div question2b *ngIf="stepKeySurvey === '2b'">
+          <div question2b *ngIf="stepKeySurvey2 === '2b'">
             <h1>
               Theo Quý khách, Trợ lý ảo My Viettel cần cải thiện điều gì để phục
               vụ khách hàng tốt hơn?
@@ -74,7 +86,7 @@
 
         </div>
         <div #question3>
-          <div #question3a *ngIf="stepKeySurvey === '3a'">
+          <div #question3a *ngIf="stepKeySurvey3 === '3a'">
             <h1>
               Ngoài các vấn đề trên, Quý khách có góp ý nào khác cho Trợ lý ảo
               My Viettel để nâng cao chất lượng phục vụ?
@@ -84,10 +96,7 @@
               <button (click)="sendSurvey()">Gửi đánh giá</button>
             </div>
           </div>
-
-        </div>
-        <div #question3>
-          <div #question3b *ngIf="stepKeySurvey === '3b'">
+          <div #question3b *ngIf="isStepSurvey3b === true">
             <h1>
               Vui lòng nhập nội dung chi tiết vấn đề khiến Quý khách chưa hài
               lòng khi tương tác với Trợ lý ảo My Viettel:
@@ -97,51 +106,27 @@
               <button (click)="sendSurvey()">Gửi đánh giá</button>
             </div>
           </div>
-
         </div>
 
 
-        <div
-            #question4
-            class="complete-survey-step"
-            *ngIf="this.isStepSurvey4 === true"
-          >
-            <div>
-              <svg
-                width="61"
-                height="60"
-                viewBox="0 0 61 60"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M58.3161 29.9692C58.3161 45.3488 45.8485 57.8164 30.469 57.8164C15.0894 57.8164 2.62183 45.3488 2.62183 29.9692C2.62183 14.5897 15.0894 2.12207 30.469 2.12207C45.8485 2.12207 58.3161 14.5897 58.3161 29.9692Z"
-                  stroke="#58B84F"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M25.7434 41.2853L48.3134 18.7153"
-                  stroke="#58B84F"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M25.7435 41.2847L12.6865 28.1655"
-                  stroke="#58B84F"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <h1>
-              Cảm ơn Quý khách đã tham gia khảo sát! Nếu có nhu cầu mời Quý
-              khách tiếp tục đưa câu hỏi đề Trợ lý ảo My Viettel hỗ trợ!
-            </h1>
+        <div #question4 class="complete-survey-step" *ngIf="this.isStepSurvey4 === true">
+          <div>
+            <svg width="61" height="60" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M58.3161 29.9692C58.3161 45.3488 45.8485 57.8164 30.469 57.8164C15.0894 57.8164 2.62183 45.3488 2.62183 29.9692C2.62183 14.5897 15.0894 2.12207 30.469 2.12207C45.8485 2.12207 58.3161 14.5897 58.3161 29.9692Z"
+                stroke="#58B84F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M25.7434 41.2853L48.3134 18.7153" stroke="#58B84F" stroke-width="3" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M25.7435 41.2847L12.6865 28.1655" stroke="#58B84F" stroke-width="3" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
           </div>
+          <h1>Khảo sát thành công</h1>
+          <h2>
+            Cảm ơn Quý khách đã tham gia khảo sát! Nếu có nhu cầu mời Quý
+            khách tiếp tục đưa câu hỏi đề Trợ lý ảo My Viettel hỗ trợ!
+          </h2>
+        </div>
       </div>
     </div>
   </nb-layout-column>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-chat-survey',
@@ -11,62 +11,107 @@ export class ChatSurveyComponent implements OnInit {
   listRate = [1, 2, 3, 4, 5, 6, 7];
   @Input('message') message: any;
   @ViewChild('outputVote') outputVote: any;
+  @ViewChildren('surveyCheckbox') checkboxitem: any;
   stringVote = '';
-  stepKeySurvey = ''
+  stepKeySurvey2 = '';
+  stepKeySurvey3 = '';
+  isStepSurvey3b = false;
   isStepSurvey4 = false;
   SurveyComment = ''
+  datacheckbox: any = [];
   isSurveyComment = false;
   surveyStatusCheckbox = [];
   ngOnInit(): void {
     this.listRate = this.listRate.reverse();
+    this.datacheckbox = [{ id: '1', name: 'Thời gian phản hồi chậm' },
+    { id: '2', name: 'Yêu cầu chưa được xử lý' },
+    { id: '3', name: 'Cung cấp thông tin không chính xác' },
+    { id: '4', name: 'Ý kiến khác' }]
   }
   actionVote(voteNumber: number) {
-
+    this.isStepSurvey3b = false;
     console.log(voteNumber);
-    if (1 >= voteNumber && voteNumber <= 3) {
+    if (1 <= voteNumber && voteNumber <= 3) {
       this.stringVote = "Không đồng ý"
-      this.stepKeySurvey = '2a'
+      this.stepKeySurvey2 = '2a'
       this.isStepSurvey4 = false;
     }
     else if (voteNumber === 4) {
       this.stringVote = "Không ý kiến"
-      this.stepKeySurvey = '2b'
+      this.stepKeySurvey2 = '2b'
       this.isStepSurvey4 = false;
     } else {
       this.stringVote = "đồng ý"
-      this.stepKeySurvey = '2b'
+      this.stepKeySurvey2 = '2b'
       this.isStepSurvey4 = false;
+
     }
   }
   sendSurvey() {
-    console.log('send survey ! ', this.stepKeySurvey);
+    console.log('send survey ! ', this.stepKeySurvey3);
+    console.log('send survey ! ', this.stepKeySurvey2);
+    this.isStepSurvey3b = false;
+    this.stepKeySurvey3 = '';
+    this.stepKeySurvey2 = '';
     this.isStepSurvey4 = true;
   }
   outSurvey() {
     console.log('out survey ! ');
   }
-  checked(event: any, numberchecked?: number): void {
-    const status_step = event.target.checked;
-    const number_step = event.target.value;
-    if (event.target.value === 1 && event.target.checked === 'true') {
-      this.stepKeySurvey === '3a'
-      console.log(event.target.value);
-    } else
-      if (event.target.value === 2 && event.target.checked === 'true') {
-        this.stepKeySurvey = '3a'
-        console.log(event.target.value);
-      } else
-        if (event.target.value === 3 && event.target.checked === 'true') {
-          this.stepKeySurvey = '3a'
-          console.log(event.target.value);
-        } else {
-          this.stepKeySurvey = ''
-          console.log(event.target.value);
-        }
-    if (event.target.value === 4 && event.target.checked === 'true') {
+  // checked(event: any, numberchecked?: number): void {
+
+  //   const status_step = checked;
+  //   const number_step = number;
+  //   debugger;
+  //   if (number === '1' && checked === true) {
+  //     this.stepKeySurvey3 = '3a'
+  //     console.log(number);
+  //   } else
+  //     if (number === '2' && checked === true) {
+  //       this.stepKeySurvey3 = '3a'
+  //       console.log(number);
+  //     } else
+  //       if (number === '3' && checked === true) {
+  //         this.stepKeySurvey3 = '3a'
+  //         console.log(number);
+  //       } else {
+  //         this.stepKeySurvey3 = ''
+  //         console.log(number);
+  //       }
+  //   if (number === '4' && checked === true) {
+  //     this.isSurveyComment = true;
+  //   } else {
+  //     this.isSurveyComment = false;
+  //   }
+  // }
+  checked(event: any) {
+    this.stepKeySurvey3 = '';
+    const datacheckbox = this.checkboxitem;
+    datacheckbox.forEach((element: any) => {
+      // console.log(element.nativeElement);
+      // const child_element = element.nativeElement;
+      // console.log(child_element.checked);
+
+      if (element.nativeElement.checked === true && element.nativeElement.value !== '4') {
+        this.stepKeySurvey3 = '3a';
+      }
+
+
+      this.checkTotalFalse(element.nativeElement)
+
+    });
+
+  }
+  checkTotalFalse(element: any) {
+    const number = element.value;
+    const checked = element.checked;
+    if (number === '4' && checked === true) {
       this.isSurveyComment = true;
     } else {
       this.isSurveyComment = false;
     }
+  }
+  nextStep3b(): void {
+    this.isStepSurvey3b = true;
   }
 }
