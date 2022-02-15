@@ -20,7 +20,7 @@
   </nb-layout-column>
 </nb-layout> -->
 
-<nb-layout>
+<nb-layout class="background-survey">
   <nb-layout-column>
     <div class="background-survey-group">
       <h1>Khảo sát mức độ hài lòng</h1>
@@ -29,17 +29,18 @@
         để giúp Quý khách giải quyết vấn đề gặp phải một cách dễ dàng”
       </h2>
       <div class="rate-item-background">
-        <div class="rate-item"  *ngFor="let item of listRate">
+        <div class="rate-item" *ngFor="let item of listRate">
           <div class="item-rate" #rateItem (click)="actionVote(item, $event)">{{ item }}</div>
         </div>
       </div>
       <div class="background-survey-form">
         <h1 #outputVote>{{ this.stringVote }}</h1>
+        <!-- <div *ngIf="this.stringVote!== ''" (click)=''>Tiếp tục</div> -->
         <div #question2A *ngIf="stepKeySurvey2 === '2a'">
-          <h1>
+          <h2>
             Lý do Quý khách không đồng ý với nhận định trên khi tương tác với
             Trợ lý ảo My Viettel (có thể chọn nhiều đáp án)?
-          </h1>
+          </h2>
           <!-- <div class="checkbox-survey">
             <div class="checkbox-survey-item">
               <input type="checkbox" (change)="checked($event)" value="1" />
@@ -74,10 +75,10 @@
         </div>
         <div #question2>
           <div question2b *ngIf="stepKeySurvey2 === '2b'">
-            <h1>
+            <h2>
               Theo Quý khách, Trợ lý ảo My Viettel cần cải thiện điều gì để phục
               vụ khách hàng tốt hơn?
-            </h1>
+            </h2>
             <div class="text-area-group">
               <textarea name="" id="" cols="30" rows="10"> </textarea>
               <button (click)="sendSurvey()">Gửi đánh giá</button>
@@ -87,20 +88,20 @@
         </div>
         <div #question3>
           <div #question3a *ngIf="stepKeySurvey3 === '3a'">
-            <h1>
+            <h2>
               Ngoài các vấn đề trên, Quý khách có góp ý nào khác cho Trợ lý ảo
               My Viettel để nâng cao chất lượng phục vụ?
-            </h1>
+            </h2>
             <div class="text-area-group">
               <textarea name="" id="" cols="30" rows="10"> </textarea>
               <button (click)="sendSurvey()">Gửi đánh giá</button>
             </div>
           </div>
           <div #question3b *ngIf="isStepSurvey3b === true">
-            <h1>
+            <h2>
               Vui lòng nhập nội dung chi tiết vấn đề khiến Quý khách chưa hài
               lòng khi tương tác với Trợ lý ảo My Viettel:
-            </h1>
+            </h2>
             <div class="text-area-group">
               <textarea name="" id="" cols="30" rows="10"> </textarea>
               <button (click)="sendSurvey()">Gửi đánh giá</button>
