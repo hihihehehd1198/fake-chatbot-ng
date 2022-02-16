@@ -99,7 +99,7 @@
               </h2>
               <div class="text-area-group">
                 <textarea name="" id="" cols="30" rows="10"> </textarea>
-                <button class="next-step-button" (click)="sendSurvey()">Gửi ý kiến</button>
+
               </div>
             </div>
             <div #question3b *ngIf="isStepSurvey3b === true">
@@ -108,10 +108,12 @@
                 lòng khi tương tác với Trợ lý ảo My Viettel:
               </h2>
               <div class="text-area-group">
-                <textarea  name="" id="" cols="30" rows="10"> </textarea>
-                <button class="next-step-button" (click)="sendSurvey()">Gửi ý kiến</button>
+                <textarea name="" id="" cols="30" rows="10"> </textarea>
+
               </div>
             </div>
+            <button *ngIf="stepKeySurvey3 === '3a' || stepKeySurvey3 === '3b'" class="next-step-button"
+              (click)="sendSurvey()">Gửi ý kiến</button>
           </div>
         </div>
 
